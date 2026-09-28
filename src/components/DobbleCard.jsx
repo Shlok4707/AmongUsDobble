@@ -1,54 +1,34 @@
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 import { toCssBox } from '../game/layout.js'
 import { getAspect, getSymbol } from '../game/symbols.js'
-import { isOpaqueAt, primeMasks } from '../game/hitTest.js'
 
 /**
  * Card Rendering Logic — spec section 15.
  *
- * CLICKABILITY, which the spec is strict about:
+ * CLICKABILITY
  *
  *   - the card itself is `pointer-events-none`, so the disc, its rim, its
  *     drop shadow and every empty gap between symbols are inert
- *   - only the <img> elements re-enable pointer events
- *   - every click is then alpha-tested against the artwork, so the transparent
- *     corners of a symbol's PNG are inert too
+ *   - each symbol is a real <button> covering its whole box, so a click
+ *     anywhere on that symbol registers
  *
- * The result: a click counts only when it lands on visible artwork. A click on
- * the card background, the gaps, the page background or the scoreboard does
- * nothing at all.
+ * A click on the card background, the gaps between symbols, the page
+ * background or the scoreboard still does nothing at all.
+ *
+ * Note on the box: symbols are packed as non-overlapping circles and each
+ * image is drawn as a rectangle inscribed in its circle (see layout.js), so
+ * no two buttons can ever overlap. A click is always unambiguous — it belongs
+ * to exactly one symbol.
  */
 
-function SymbolButton({ placement, onHit, onMiss, disabled, state }) {
+function SymbolButton({ placement, onHit, disabled, state }) {
   const symbol = getSymbol(placement.symbolId)
   const box = toCssBox(placement, getAspect(placement.symbolId))
 
   if (!symbol) return null
 
-  const handle = (event) => {
-    if (disabled) return
-
-    const img = event.currentTarget
-    const u = event.nativeEvent.offsetX / img.clientWidth
-    const v = event.nativeEvent.offsetY / img.clientHeight
-
-    // offsetX/offsetY are reported in the element's own untransformed
-    // coordinate space, so the rotation applied by the parent is already
-    // accounted for and the alpha sample lines up with what was clicked.
-    if (isOpaqueAt(symbol.src, u, v)) onHit(placement.symbolId)
-    else onMiss()
-  }
-
-  const handleKey = (event) => {
-    if (disabled) return
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      onHit(placement.symbolId)
-    }
-  }
-
-  // A wrong answer now lights up red, mirroring the cyan glow a correct one
-  // gets, so the feedback reads the same way for both outcomes.
+  // A wrong answer lights up red, mirroring the cyan glow a correct one gets,
+  // so the feedback reads the same way for both outcomes.
   const stateClass =
     state === 'correct' || state === 'reveal'
       ? 'animate-matchGlow'
@@ -83,33 +63,48 @@ function SymbolButton({ placement, onHit, onMiss, disabled, state }) {
         />
       )}
 
-      <img
-        src={symbol.src}
-        alt={symbol.label}
-        draggable={false}
-        onClick={handle}
-        onKeyDown={handleKey}
-        tabIndex={disabled ? -1 : 0}
-        role="button"
+      {/*
+        A real <button>, not an image with a click handler. It fills the whole
+        symbol box, so anywhere on the symbol counts, and it brings keyboard
+        activation, focus rings and the right semantics for free.
+      */}
+      <button
+        type="button"
+        onClick={() => !disabled && onHit(placement.symbolId)}
+        disabled={disabled}
+        aria-label={symbol.label}
         className={[
-          'pointer-events-auto h-full w-full select-none object-contain',
-          'transition-transform duration-100',
-          disabled ? 'cursor-default' : 'cursor-pointer hover:scale-[1.08] active:scale-95',
-          state === 'reveal' || state === 'correct' ? 'scale-110' : '',
+          'pointer-events-auto block h-full w-full border-0 bg-transparent p-0',
+          disabled ? 'cursor-default' : 'cursor-pointer',
         ].join(' ')}
-        style={{ filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.45))' }}
-      />
+      >
+        <img
+          src={symbol.src}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className={[
+            // The image never reacts to the pointer itself — the button does.
+            // No hover scaling: symbols used to grow and shrink under the
+            // cursor, which made them feel like they were dodging the click.
+            'pointer-events-none h-full w-full select-none object-contain',
+            'transition-transform duration-150',
+            state === 'reveal' || state === 'correct' ? 'scale-110' : '',
+          ].join(' ')}
+          style={{ filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.45))' }}
+        />
+      </button>
     </div>
   )
 }
 
+/**
+ * `onMiss` is still accepted so callers need no change, but nothing calls it
+ * any more: with the whole symbol box clickable there is no such thing as
+ * clicking a symbol and missing it.
+ */
 function DobbleCard({ layout, onHit, onMiss, disabled = false, revealId = null, feedback = null, label }) {
-  // Warm the alpha masks for this round's artwork so the very first click of a
-  // round is already pixel-exact rather than falling back to a box hit.
-  useEffect(() => {
-    const srcs = layout.map((p) => getSymbol(p.symbolId)?.src).filter(Boolean)
-    primeMasks(srcs)
-  }, [layout])
+  void onMiss
 
   return (
     <div
@@ -134,7 +129,6 @@ function DobbleCard({ layout, onHit, onMiss, disabled = false, revealId = null, 
             key={`${placement.symbolId}-${placement.x.toFixed(2)}`}
             placement={placement}
             onHit={onHit}
-            onMiss={onMiss}
             disabled={disabled}
             state={state}
           />
