@@ -34,7 +34,7 @@ export default function JoinCodePage() {
     <Stage bg={bg}>
       <form
         onSubmit={submit}
-        className="absolute inset-x-0 top-[32cqmin] z-20 flex flex-col items-center px-[4cqmin]"
+        className="absolute inset-x-0 top-[32vmin] z-20 flex flex-col items-center px-[4vmin]"
       >
         {/* The real input, transparent and stretched over the four slots. */}
         <div className="relative">
@@ -50,7 +50,7 @@ export default function JoinCodePage() {
             aria-label="Enter the 4 character game code"
             className="peer absolute inset-0 z-10 h-full w-full cursor-text bg-transparent text-transparent caret-transparent outline-none"
           />
-          <div className="flex items-center justify-center gap-[2cqmin]">
+          <div className="flex items-center justify-center gap-[2vmin]">
             {Array.from({ length: CODE_LENGTH }).map((_, i) => {
               const char = value[i] || ''
               const active = !joining && i === Math.min(value.length, CODE_LENGTH - 1)
@@ -58,8 +58,8 @@ export default function JoinCodePage() {
                 <span
                   key={i}
                   className={[
-                    'flex h-[16cqmin] w-[13cqmin] items-center justify-center rounded-[1.8cqmin]',
-                    'border-[0.5cqmin] bg-[#0B1B36]/85 text-[9cqmin] font-black text-[#9AD9F5]',
+                    'flex h-[16vmin] w-[13vmin] items-center justify-center rounded-[1.8vmin]',
+                    'border-[0.5vmin] bg-[#0B1B36]/85 text-[9vmin] font-black text-[#9AD9F5]',
                     'transition-colors duration-150',
                     char
                       ? 'border-[#9AD9F5]/80'
@@ -67,7 +67,7 @@ export default function JoinCodePage() {
                         ? 'border-[#9AD9F5]/60 peer-focus:border-[#9AD9F5]'
                         : 'border-white/20',
                   ].join(' ')}
-                  style={char ? { textShadow: '0 0 2.5cqmin rgba(154,217,245,0.75)' } : undefined}
+                  style={char ? { textShadow: '0 0 2.5vmin rgba(154,217,245,0.75)' } : undefined}
                 >
                   {char || <span className="text-white/15">·</span>}
                 </span>
@@ -76,20 +76,20 @@ export default function JoinCodePage() {
           </div>
         </div>
 
-        <div className="mt-[4cqmin]">
+        <div className="mt-[4vmin]">
           <ChunkyButton tone="green" type="submit" onClick={submit} disabled={!complete || joining}>
             {joining ? 'Connecting…' : 'Click to Play'}
           </ChunkyButton>
         </div>
 
-        <div className="mt-[2.5cqmin] flex h-[8cqmin] items-start justify-center">
+        <div className="mt-[2.5vmin] flex h-[8vmin] items-start justify-center">
           {joining && statusText && (
-            <p className="rounded-[1.3cqmin] border-[0.35cqmin] border-white/25 bg-[#0B1B36]/85 px-[3cqmin] py-[1.4cqmin] text-[1.9cqmin] font-bold text-white/80">
+            <p className="rounded-[1.3vmin] border-[0.35vmin] border-white/25 bg-[#0B1B36]/85 px-[3vmin] py-[1.4vmin] text-[1.9vmin] font-bold text-white/80">
               {statusText}
             </p>
           )}
           {!joining && error && (
-            <p className="max-w-[80cqmin] animate-popIn rounded-[1.3cqmin] border-[0.35cqmin] border-[#7A0838] bg-[#C51111]/92 px-[3cqmin] py-[1.4cqmin] text-center text-[2cqmin] font-bold text-white">
+            <p className="max-w-[80vmin] animate-popIn rounded-[1.3vmin] border-[0.35vmin] border-[#7A0838] bg-[#C51111]/92 px-[3vmin] py-[1.4vmin] text-center text-[2vmin] font-bold text-white">
               {error}
             </p>
           )}

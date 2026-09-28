@@ -7,15 +7,15 @@ const TONES = {
 }
 
 const SIZES = {
-  md: 'rounded-[1.6cqmin] border-[0.5cqmin] px-[4.5cqmin] py-[2cqmin] text-[2.6cqmin]',
-  sm: 'rounded-[1.3cqmin] border-[0.4cqmin] px-[3.2cqmin] py-[1.5cqmin] text-[2.1cqmin]',
+  md: 'rounded-[1.6vmin] border-[0.5vmin] px-[4.5vmin] py-[2vmin] text-[2.6vmin]',
+  sm: 'rounded-[1.3vmin] border-[0.4vmin] px-[3.2vmin] py-[1.5vmin] text-[2.1vmin]',
 }
 
 /**
  * The chunky Among Us style button: thick dark border, hard drop shadow,
  * presses down on click.
  *
- * Sized in `cqmin` — a percentage of the viewport's shorter side — so it stays
+ * Sized in `vmin` — a percentage of the viewport's shorter side — so it stays
  * proportionate on a small laptop and on an ultrawide monitor alike.
  */
 export default function ChunkyButton({
@@ -34,16 +34,16 @@ export default function ChunkyButton({
       onClick={onClick}
       disabled={disabled}
       className={[
-        'relative inline-flex items-center justify-center gap-[1.2cqmin] select-none',
+        'relative inline-flex items-center justify-center gap-[1.2vmin] select-none',
         'font-black uppercase tracking-[0.12em] text-white',
-        'shadow-[0_0.9cqmin_0_0_rgba(0,0,0,0.5)] transition-all duration-100',
-        'active:translate-y-[0.8cqmin] active:shadow-none',
+        'shadow-[0_0.9vmin_0_0_rgba(0,0,0,0.5)] transition-all duration-100',
+        'active:translate-y-[0.8vmin] active:shadow-none',
         'disabled:cursor-not-allowed disabled:opacity-50 disabled:active:translate-y-0',
         SIZES[size] || SIZES.md,
         TONES[tone] || TONES.blue,
         className,
       ].join(' ')}
-      style={{ textShadow: '0 0.25cqmin 0 rgba(0,0,0,0.45)' }}
+      style={{ textShadow: '0 0.25vmin 0 rgba(0,0,0,0.45)' }}
       {...rest}
     >
       {children}

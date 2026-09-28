@@ -114,12 +114,12 @@ function DobbleCard({ layout, onHit, onMiss, disabled = false, revealId = null, 
   return (
     <div
       className="pointer-events-none relative aspect-square w-full animate-cardIn rounded-full
-                 border-[0.55cqw] border-[#0B1220] bg-gradient-to-b from-[#F3F7FF] to-[#C9D8EE]"
-      style={{ boxShadow: '0 0.8cqw 0 rgba(0,0,0,0.45), inset 0 0 2cqw rgba(0,0,0,0.12)' }}
+                 border-[0.55vw] border-[#0B1220] bg-gradient-to-b from-[#F3F7FF] to-[#C9D8EE]"
+      style={{ boxShadow: '0 0.8vw 0 rgba(0,0,0,0.45), inset 0 0 2vw rgba(0,0,0,0.12)' }}
       aria-label={label}
     >
       {/* Inner rim — decorative only, never clickable. */}
-      <div className="pointer-events-none absolute inset-[1.6%] rounded-full border-[0.2cqw] border-black/10" />
+      <div className="pointer-events-none absolute inset-[1.6%] rounded-full border-[0.2vw] border-black/10" />
 
       {layout.map((placement) => {
         let state = null

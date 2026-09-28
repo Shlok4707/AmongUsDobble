@@ -49,8 +49,8 @@ export default function GameBGPage() {
     <Stage bg={bg} dim={0.15}>
       <div className="absolute inset-0 flex flex-col">
         {/* --------------------------------------------- scoreboard ----- */}
-        <div className="pointer-events-none flex shrink-0 justify-center px-[3cqmin] pt-[7cqmin]">
-          <div className="grid w-[min(94vw,86cqmin)] grid-cols-3 gap-[2.5cqmin]">
+        <div className="pointer-events-none flex shrink-0 justify-center px-[3vmin] pt-[7vmin]">
+          <div className="grid w-[min(94vw,86vmin)] grid-cols-3 gap-[2.5vmin]">
             <StatBox label="You" value={myScore} tone="cyan" floaters={floaters} />
             <StatBox
               label="Round"
@@ -64,7 +64,7 @@ export default function GameBGPage() {
         {/* ---------------------------------------------------- cards ---- */}
         {/* pt- opens a clear gap under the scoreboard; the cards then centre
             in what is left, so they sit lower without crowding the banner. */}
-        <div className="flex min-h-0 flex-1 items-center justify-center gap-[3vw] px-[2vw] pt-[6cqmin]">
+        <div className="flex min-h-0 flex-1 items-center justify-center gap-[3vw] px-[2vw] pt-[6vmin]">
           <div style={{ width: CARD_SIZE, height: CARD_SIZE }}>
             <DobbleCard
               label="Card one"
@@ -91,15 +91,15 @@ export default function GameBGPage() {
 
         {/* -------------------------------------------- round banner ----- */}
         {/* Its own band beneath the cards — never on top of a symbol. */}
-        <div className="pointer-events-none flex h-[13cqmin] shrink-0 items-center justify-center px-[4cqmin]">
+        <div className="pointer-events-none flex h-[13vmin] shrink-0 items-center justify-center px-[4vmin]">
           {roundOver && (
             <div
               className={[
-                'animate-popIn rounded-[1.8cqmin] border-[0.5cqmin] px-[5cqmin] py-[1.8cqmin]',
-                'text-[3.4cqmin] font-black uppercase tracking-[0.12em] text-white',
+                'animate-popIn rounded-[1.8vmin] border-[0.5vmin] px-[5vmin] py-[1.8vmin]',
+                'text-[3.4vmin] font-black uppercase tracking-[0.12em] text-white',
                 iWonRound ? 'border-[#0A5B28] bg-[#16A34A]' : 'border-[#7A0838] bg-[#C51111]',
               ].join(' ')}
-              style={{ textShadow: '0 0.35cqmin 0 rgba(0,0,0,0.45)' }}
+              style={{ textShadow: '0 0.35vmin 0 rgba(0,0,0,0.45)' }}
             >
               {iWonRound ? 'You got it!' : 'Opponent got it'}
             </div>
@@ -124,18 +124,18 @@ function StatBox({ label, value, tone, floaters = [] }) {
 
   return (
     <div
-      className={`relative flex min-h-[9cqmin] flex-col items-center justify-center rounded-[1.4cqmin] border-[0.4cqmin] px-[2cqmin] py-[1.2cqmin] ${tones[tone]}`}
+      className={`relative flex min-h-[9vmin] flex-col items-center justify-center rounded-[1.4vmin] border-[0.4vmin] px-[2vmin] py-[1.2vmin] ${tones[tone]}`}
     >
-      <div className="text-[1.45cqmin] font-bold uppercase tracking-[0.25em] text-white/55">
+      <div className="text-[1.45vmin] font-bold uppercase tracking-[0.25em] text-white/55">
         {label}
       </div>
-      <div className="text-[3.4cqmin] font-black leading-none">{value}</div>
+      <div className="text-[3.4vmin] font-black leading-none">{value}</div>
 
       {floaters.map((id) => (
         <span
           key={id}
-          className="pointer-events-none absolute left-1/2 top-full animate-floatUp text-[3.2cqmin] font-black text-[#50EF39]"
-          style={{ textShadow: '0 0 2cqmin rgba(80,239,57,0.8)' }}
+          className="pointer-events-none absolute left-1/2 top-full animate-floatUp text-[3.2vmin] font-black text-[#50EF39]"
+          style={{ textShadow: '0 0 2vmin rgba(80,239,57,0.8)' }}
         >
           +1
         </span>

@@ -4,7 +4,7 @@
  *
  *   npm run test:requests
  */
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 
 const read = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '')
@@ -65,9 +65,29 @@ check('shows rounds won out of the total', /Rounds won/.test(result) && /\{total
 
 console.log('\n— main game page —')
 check('score boxes share one equal 3-column grid', /grid-cols-3/.test(game))
-check('scoreboard row is centred', /justify-center/.test(game) && /w-\[min\(94vw,86cqmin\)\]/.test(game))
+check('scoreboard row is centred', /justify-center/.test(game) && /w-\[min\(94vw,86vmin\)\]/.test(game))
 check('wrong click flashes red', /wrongGlow/.test(card) && /rgba\(255,45,45/.test(card))
-check('round banner has its own band below the cards', /round banner/.test(game) && /h-\[13cqmin\] shrink-0/.test(game))
+check('round banner has its own band below the cards', /round banner/.test(game) && /h-\[13vmin\] shrink-0/.test(game))
+
+console.log('\n— sizing is pure CSS —')
+{
+  const ui = [stage, home, join, game, result, card, read('src/components/ChunkyButton.jsx'),
+              read('src/components/BackButton.jsx'), read('src/components/NoticeModal.jsx'),
+              read('src/pages/CodeCreatedPage.jsx'), read('src/pages/GameStartTimerPage.jsx')].join('\n')
+  check('backgrounds are covered by CSS object-cover', /object-cover/.test(stage))
+  check('no container-query units or contexts remain', !/cqmin|cqw\b|cqh\b|containerType/.test(ui))
+  check('layout uses vw / vh / vmin', /vmin|vw|vh/.test(ui))
+  check('no JS window measuring for layout', !/innerWidth|innerHeight|ResizeObserver|getBoundingClientRect/.test(ui))
+}
+
+console.log('\n— assets live under src —')
+{
+  const symbols = existsSync('src/assets/symbols') ? readdirSync('src/assets/symbols') : []
+  const screens = existsSync('src/assets/screens') ? readdirSync('src/assets/screens') : []
+  check('57 card images in src/assets/symbols', symbols.length === 57, `${symbols.length} found`)
+  check('screen artwork in src/assets/screens', screens.length >= 7, `${screens.length} found`)
+  check('symbols are imported from src, not /public', /assets\/symbols/.test(read('src/game/symbols.js')))
+}
 
 console.log('\n— points —')
 check('points rule lives in the engine', /export function pointsFor/.test(engine))

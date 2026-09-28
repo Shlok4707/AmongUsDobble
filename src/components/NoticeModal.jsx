@@ -22,17 +22,16 @@ export default function NoticeModal({ title = 'Game ended', message, onDismiss }
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center px-6"
-      style={{ containerType: 'size' }}
       role="dialog"
       aria-modal="true"
       aria-label={title}
     >
       <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" onClick={onDismiss} />
 
-      <div className="relative w-[min(92vw,58cqmin)] animate-popIn rounded-[2.5cqmin] border-[0.6cqmin] border-[#1a2547] bg-[#111a33] p-[5cqmin] text-center shadow-[0_1.5cqmin_0_rgba(0,0,0,0.5)]">
-        <div className="mx-auto mb-[2.5cqmin] flex h-[11cqmin] w-[11cqmin] items-center justify-center rounded-full border-[0.5cqmin] border-[#7A0838] bg-[#2A0B12]">
+      <div className="relative w-[min(92vw,58vmin)] animate-popIn rounded-[2.5vmin] border-[0.6vmin] border-[#1a2547] bg-[#111a33] p-[5vmin] text-center shadow-[0_1.5vmin_0_rgba(0,0,0,0.5)]">
+        <div className="mx-auto mb-[2.5vmin] flex h-[11vmin] w-[11vmin] items-center justify-center rounded-full border-[0.5vmin] border-[#7A0838] bg-[#2A0B12]">
           {/* A crewmate with a slash through it — "the other player is gone". */}
-          <svg viewBox="0 0 64 64" className="h-[7cqmin] w-[7cqmin]" aria-hidden="true">
+          <svg viewBox="0 0 64 64" className="h-[7vmin] w-[7vmin]" aria-hidden="true">
             <path
               d="M18 26c0-9 7-15 15-15s15 6 15 15v22c0 4-2 6-6 6h-4V42c0-3-2-5-5-5s-5 2-5 5v12h-4c-4 0-6-2-6-6z"
               fill="#8394BF"
@@ -59,12 +58,12 @@ export default function NoticeModal({ title = 'Game ended', message, onDismiss }
           </svg>
         </div>
 
-        <h2 className="text-[3.4cqmin] font-black uppercase tracking-[0.12em] text-white">{title}</h2>
-        <p className="mx-auto mt-[1.8cqmin] max-w-[46cqmin] text-[2.2cqmin] font-semibold leading-snug text-white/70">
+        <h2 className="text-[3.4vmin] font-black uppercase tracking-[0.12em] text-white">{title}</h2>
+        <p className="mx-auto mt-[1.8vmin] max-w-[46vmin] text-[2.2vmin] font-semibold leading-snug text-white/70">
           {message}
         </p>
 
-        <div className="mt-[4cqmin]">
+        <div className="mt-[4vmin]">
           <ChunkyButton tone="blue" onClick={onDismiss} autoFocus>
             Back to Home
           </ChunkyButton>

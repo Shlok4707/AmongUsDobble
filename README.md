@@ -18,7 +18,7 @@ folder.** Do this:
 4. Hard-refresh the browser (**Cmd-Shift-R** / **Ctrl-Shift-R**).
 
 **How to be sure:** the bottom-left of the Home Page shows a version and build
-time, e.g. `v2.0.0 · 09-25 10:52`. The same line is printed to the browser
+time, e.g. `v2.2.0 · 09-28 05:40`. The same line is printed to the browser
 console on load. If that version is not the one you just unzipped, you are
 looking at the old build.
 
@@ -180,6 +180,25 @@ Drop `dist/` on Vercel, Netlify, GitHub Pages or Cloudflare Pages.
 
 > Opening PC 2 at `http://<PC1-LAN-IP>:5173` will **not** work: that is neither
 > `localhost` nor HTTPS, so the browser blocks the connection APIs.
+
+---
+
+## How the layout scales
+
+Every screen's background is a single `<img>` at `position: fixed; inset: 0`
+with `object-fit: cover`, so it fills the whole viewport on any device with no
+letterbox bars. **There is no JavaScript involved in sizing** — no window
+measuring, no resize listeners, no recalculation on rotate or zoom. The browser
+keeps it right on its own.
+
+Everything on top is positioned against the viewport and sized in **`vmin`** — a
+percentage of the *shorter* side — with `vw`/`vh` where a specific axis is what
+matters (card diameter is `min(62vh, 42vw)`, for example). `vmin` is used rather
+than `vw` because text sized in `vw` becomes absurd on an ultrawide monitor;
+sizing off the shorter side keeps a 4:3 laptop and a 21:9 monitor looking the
+same.
+
+Checked at 2560×1080, 1920×1080, 1280×800 and 1280×1024.
 
 ---
 

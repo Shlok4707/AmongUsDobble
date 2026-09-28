@@ -32,22 +32,22 @@ export default function ResultPage({ bg, tone, caption, buttonTone, outcome }) {
       <h1 className="sr-only-focusable absolute" data-result={outcome}>
         {outcome === 'win' ? 'You won' : outcome === 'lose' ? 'You lost' : "It's a draw"}
       </h1>
-      <div className="absolute inset-y-0 right-0 z-20 flex w-[min(46vw,60cqmin)] flex-col items-center justify-center gap-[2.6cqmin] px-[4cqmin]">
+      <div className="absolute inset-y-0 right-0 z-20 flex w-[min(46vw,60vmin)] flex-col items-center justify-center gap-[2.6vmin] px-[4vmin]">
         <div
-          className={`w-full animate-popIn rounded-[2cqmin] border-[0.5cqmin] px-[4cqmin] py-[2.4cqmin] text-center backdrop-blur-sm ${tones[tone]}`}
+          className={`w-full animate-popIn rounded-[2vmin] border-[0.5vmin] px-[4vmin] py-[2.4vmin] text-center backdrop-blur-sm ${tones[tone]}`}
         >
-          <div className="text-[1.7cqmin] font-bold uppercase tracking-[0.3em] text-white/55">
+          <div className="text-[1.7vmin] font-bold uppercase tracking-[0.3em] text-white/55">
             Rounds won
           </div>
-          <div className="text-[7.5cqmin] font-black leading-none">
+          <div className="text-[7.5vmin] font-black leading-none">
             {myScore}
             <span className="text-white/35"> / {totalRounds}</span>
           </div>
-          <div className="mt-[1.5cqmin] text-[2cqmin] font-semibold text-white/60">
+          <div className="mt-[1.5vmin] text-[2vmin] font-semibold text-white/60">
             Opponent won {opponentScore}
           </div>
           {caption && (
-            <div className="mt-[1cqmin] text-[1.8cqmin] font-bold uppercase tracking-[0.2em] text-white/45">
+            <div className="mt-[1vmin] text-[1.8vmin] font-bold uppercase tracking-[0.2em] text-white/45">
               {caption}
             </div>
           )}
@@ -57,13 +57,13 @@ export default function ResultPage({ bg, tone, caption, buttonTone, outcome }) {
             scores; the loser's panel deliberately still shows a 0 rather than
             being hidden, so the screen reads the same way for both players. */}
         <div
-          className={`w-full animate-popIn rounded-[2cqmin] border-[0.5cqmin] px-[4cqmin] py-[2.4cqmin] text-center backdrop-blur-sm ${tones[tone]}`}
+          className={`w-full animate-popIn rounded-[2vmin] border-[0.5vmin] px-[4vmin] py-[2.4vmin] text-center backdrop-blur-sm ${tones[tone]}`}
           style={{ animationDelay: '120ms' }}
         >
-          <div className="text-[1.7cqmin] font-bold uppercase tracking-[0.3em] text-white/55">
+          <div className="text-[1.7vmin] font-bold uppercase tracking-[0.3em] text-white/55">
             Points won
           </div>
-          <div className="text-[6.5cqmin] font-black leading-none">{points.toLocaleString()}</div>
+          <div className="text-[6.5vmin] font-black leading-none">{points.toLocaleString()}</div>
         </div>
 
         <ChunkyButton tone={buttonTone} onClick={goHome}>

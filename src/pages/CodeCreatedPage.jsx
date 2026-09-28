@@ -27,18 +27,18 @@ export default function CodeCreatedPage() {
 
   return (
     <Stage bg={bg}>
-      <div className="absolute inset-x-0 top-[38cqmin] z-20 flex flex-col items-center px-[4cqmin]">
-        <div className="flex items-center justify-center gap-[2cqmin]">
+      <div className="absolute inset-x-0 top-[38vmin] z-20 flex flex-col items-center px-[4vmin]">
+        <div className="flex items-center justify-center gap-[2vmin]">
           {(code || '····').split('').map((char, i) => (
             <span
               key={i}
-              className="flex h-[16cqmin] w-[13cqmin] animate-popIn items-center justify-center
-                         rounded-[1.8cqmin] border-[0.5cqmin] border-[#9AD9F5]/70 bg-[#0B1B36]/85
-                         text-[9cqmin] font-black text-[#9AD9F5]"
+              className="flex h-[16vmin] w-[13vmin] animate-popIn items-center justify-center
+                         rounded-[1.8vmin] border-[0.5vmin] border-[#9AD9F5]/70 bg-[#0B1B36]/85
+                         text-[9vmin] font-black text-[#9AD9F5]"
               style={{
                 animationDelay: `${i * 45}ms`,
-                textShadow: '0 0 2.5cqmin rgba(154,217,245,0.75)',
-                boxShadow: 'inset 0 0 3cqmin rgba(154,217,245,0.18)',
+                textShadow: '0 0 2.5vmin rgba(154,217,245,0.75)',
+                boxShadow: 'inset 0 0 3vmin rgba(154,217,245,0.18)',
               }}
             >
               {char}
@@ -50,8 +50,8 @@ export default function CodeCreatedPage() {
           type="button"
           onClick={copy}
           disabled={!code}
-          className="mt-[3cqmin] rounded-[1.3cqmin] border-[0.35cqmin] border-white/25 bg-white/10
-                     px-[3.4cqmin] py-[1.5cqmin] text-[1.9cqmin] font-bold uppercase tracking-[0.15em]
+          className="mt-[3vmin] rounded-[1.3vmin] border-[0.35vmin] border-white/25 bg-white/10
+                     px-[3.4vmin] py-[1.5vmin] text-[1.9vmin] font-bold uppercase tracking-[0.15em]
                      text-white/80 transition hover:bg-white/20 disabled:opacity-40"
         >
           {copied ? 'Copied!' : 'Copy code'}

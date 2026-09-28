@@ -1,7 +1,7 @@
 {
   "name": "among-us-dobble",
   "private": true,
-  "version": "2.1.0",
+  "version": "2.2.0",
   "type": "module",
   "description": "Among Us themed Dobble / Spot It \u2014 two-PC multiplayer, frontend only (React + Vite + Tailwind + PeerJS)",
   "scripts": {

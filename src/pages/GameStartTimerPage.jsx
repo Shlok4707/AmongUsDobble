@@ -15,9 +15,9 @@ export default function GameStartTimerPage() {
 
   return (
     <Stage bg={bg}>
-      <div className="pointer-events-none absolute inset-x-0 top-[30cqmin] z-20 flex justify-center px-[4cqmin]">
+      <div className="pointer-events-none absolute inset-x-0 top-[30vmin] z-20 flex justify-center px-[4vmin]">
         {countdown === null ? (
-          <p className="text-[3cqmin] font-bold tracking-[0.2em] text-white/70">
+          <p className="text-[3vmin] font-bold tracking-[0.2em] text-white/70">
             {status === 'connected' ? 'GET READY…' : 'CONNECTING…'}
           </p>
         ) : (
@@ -25,12 +25,12 @@ export default function GameStartTimerPage() {
             key={String(countdown)}
             className={[
               'block animate-countPop text-center font-black leading-none',
-              isGo ? 'text-[13cqmin] text-[#50EF39]' : 'text-[24cqmin] text-white',
+              isGo ? 'text-[13vmin] text-[#50EF39]' : 'text-[24vmin] text-white',
             ].join(' ')}
             style={{
               textShadow: isGo
-                ? '0 0 4cqmin rgba(80,239,57,0.8), 0 0.8cqmin 0 rgba(0,0,0,0.5)'
-                : '0 0 4cqmin rgba(154,217,245,0.7), 0 0.8cqmin 0 rgba(0,0,0,0.5)',
+                ? '0 0 4vmin rgba(80,239,57,0.8), 0 0.8vmin 0 rgba(0,0,0,0.5)'
+                : '0 0 4vmin rgba(154,217,245,0.7), 0 0.8vmin 0 rgba(0,0,0,0.5)',
             }}
           >
             {isGo ? 'START!' : countdown}

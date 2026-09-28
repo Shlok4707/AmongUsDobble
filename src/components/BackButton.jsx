@@ -13,7 +13,7 @@ export default function BackButton({ label = 'Back' }) {
   const { goHome } = useGame()
 
   return (
-    <div className="absolute bottom-[4cqmin] right-[4cqmin] z-40">
+    <div className="absolute bottom-[4vmin] right-[4vmin] z-40">
       <ChunkyButton tone="slate" size="sm" onClick={goHome}>
         <span aria-hidden="true">←</span> {label}
       </ChunkyButton>
